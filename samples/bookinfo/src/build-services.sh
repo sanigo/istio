@@ -14,7 +14,6 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
-set -o errexit
 
 if [ "$#" -ne 2 ]; then
     echo "Incorrect parameters"
@@ -43,7 +42,7 @@ popd
 pushd "$SCRIPTDIR/reviews"
   #java build the app.
   docker run --rm -u root -v "$(pwd)":/home/gradle/project -w /home/gradle/project gradle:4.8.1 gradle clean build
-  pushd reviews-wlpcfg
+  pushd reviews-tomcat
     #plain build -- no ratings
     docker build --pull -t "${PREFIX}/examples-bookinfo-reviews-v1:${VERSION}" -t "${PREFIX}/examples-bookinfo-reviews-v1:latest" --build-arg service_version=v1 .
     #with ratings black stars
@@ -65,6 +64,7 @@ pushd "$SCRIPTDIR/ratings"
 popd
 
 pushd "$SCRIPTDIR/mysql"
+  docker build --pull -t "${PREFIX}/examples-bookinfo-ratings-v1:${VERSION}" -t "${PREFIX}/examples-bookinfo-ratings-v1:latest" --build-arg service_version=v1 .
   docker build --pull -t "${PREFIX}/examples-bookinfo-mysqldb:${VERSION}" -t "${PREFIX}/examples-bookinfo-mysqldb:latest" .
 popd
 

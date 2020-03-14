@@ -16,6 +16,10 @@
 
 # this repo is not yet on the container plan by default
 BUILD_WITH_CONTAINER ?= 0
+export HUB ?= docker-istio.jointforce.com
+export TAG ?= 1.4.6
+VERSION ?= 1.4.6
+export BUILDINFO=$(shell echo `pwd`/build_info)
 
 # create phony targets for the top-level items in the repo
 PHONYS := $(shell ls | grep -v Makefile)

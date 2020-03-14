@@ -181,10 +181,14 @@ mkdir -p "${ISTIO_BIN}"
 set_download_command
 
 # Download and extract the Envoy linux debug binary.
-download_envoy_if_necessary "${ISTIO_ENVOY_LINUX_DEBUG_URL}" "$ISTIO_ENVOY_LINUX_DEBUG_PATH"
+#download_envoy_if_necessary "${ISTIO_ENVOY_LINUX_DEBUG_URL}" "$ISTIO_ENVOY_LINUX_DEBUG_PATH"
+mkdir -p "$(dirname "$ISTIO_ENVOY_LINUX_DEBUG_PATH")"
+cp /opt/istio-1.4.6/debug/envoy "$ISTIO_ENVOY_LINUX_DEBUG_PATH"
 
 # Download and extract the Envoy linux release binary.
-download_envoy_if_necessary "${ISTIO_ENVOY_LINUX_RELEASE_URL}" "$ISTIO_ENVOY_LINUX_RELEASE_PATH"
+#download_envoy_if_necessary "${ISTIO_ENVOY_LINUX_RELEASE_URL}" "$ISTIO_ENVOY_LINUX_RELEASE_PATH"
+mkdir -p "$(dirname "$ISTIO_ENVOY_LINUX_RELEASE_PATH")"
+cp /opt/istio-1.4.6/release/envoy "$ISTIO_ENVOY_LINUX_RELEASE_PATH"
 
 if [[ "$LOCAL_OS" == "Darwin" ]]; then
   # Download and extract the Envoy macOS release binary

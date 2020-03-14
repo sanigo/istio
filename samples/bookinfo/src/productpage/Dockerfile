@@ -15,7 +15,7 @@
 FROM python:3.7.4-slim
 
 COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
+RUN apt-get update && apt-get install -y gcc && apt-get clean -y && rm -rf /var/cache/debconf/* /var/lib/apt/lists/* && pip install --no-cache-dir -r requirements.txt
 
 COPY test-requirements.txt ./
 RUN pip install --no-cache-dir -r test-requirements.txt
