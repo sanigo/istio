@@ -16,7 +16,7 @@
 
 # this repo is not yet on the container plan by default
 BUILD_WITH_CONTAINER ?= 0
-export GOPRIVATE=github.com/istio-private/operator
+#export GOPRIVATE=github.com/istio-private/operator
 export HUB ?= docker-istio.jointforce.com
 export TAG ?= 1.4.7
 VERSION ?= 1.4.7
