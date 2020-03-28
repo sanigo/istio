@@ -1,0 +1,5 @@
+istio.io/pkg/version.buildVersion=1.4.7
+istio.io/pkg/version.buildGitRevision=6934236bd2f0fbdb622f53401df733598c57fbd5
+istio.io/pkg/version.buildStatus=Clean
+istio.io/pkg/version.buildTag=1.4.7
+istio.io/pkg/version.buildHub=docker.io/istio
