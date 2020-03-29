@@ -192,13 +192,17 @@ set_download_command
 
 if [[ -n "${DEBUG_IMAGE:-}" ]]; then
   # Download and extract the Envoy linux debug binary.
-  download_envoy_if_necessary "${ISTIO_ENVOY_LINUX_DEBUG_URL}" "$ISTIO_ENVOY_LINUX_DEBUG_PATH"
+  #download_envoy_if_necessary "${ISTIO_ENVOY_LINUX_DEBUG_URL}" "$ISTIO_ENVOY_LINUX_DEBUG_PATH"
+  mkdir -p "$(dirname "$ISTIO_ENVOY_LINUX_DEBUG_PATH")"
+  cp ../proxy/bazel-bin/src/envoy/envoy "$ISTIO_ENVOY_LINUX_DEBUG_PATH"
 else
   echo "Skipping envoy debug. Set DEBUG_IMAGE to download."
 fi
 
 # Download and extract the Envoy linux release binary.
-download_envoy_if_necessary "${ISTIO_ENVOY_LINUX_RELEASE_URL}" "$ISTIO_ENVOY_LINUX_RELEASE_PATH"
+#download_envoy_if_necessary "${ISTIO_ENVOY_LINUX_RELEASE_URL}" "$ISTIO_ENVOY_LINUX_RELEASE_PATH"
+mkdir -p "$(dirname "$ISTIO_ENVOY_LINUX_RELEASE_PATH")"
+cp ../proxy/bazel-bin/src/envoy/envoy "$ISTIO_ENVOY_LINUX_RELEASE_PATH"
 
 if [[ "$GOOS_LOCAL" == "darwin" ]]; then
   # Download and extract the Envoy macOS release binary

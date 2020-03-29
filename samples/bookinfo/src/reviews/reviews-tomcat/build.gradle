@@ -1,0 +1,16 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+
+apply plugin: 'eclipse'
+
+task copyApplication(type: Copy) {
+    from '../reviews-application/build/libs/reviews-application-1.0.war'
+    into '.'
+}
+
+task build(dependsOn: ['copyApplication']){
+}
+

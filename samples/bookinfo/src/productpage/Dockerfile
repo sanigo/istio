@@ -15,7 +15,7 @@
 FROM python:3.7.4-slim
 
 COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
+RUN apt-get update && apt-get install -y gcc && apt-get clean -y && rm -rf /var/cache/debconf/* /var/lib/apt/lists/* && pip install --no-cache-dir -r requirements.txt
 
 COPY test-requirements.txt ./
 RUN pip install --no-cache-dir -r test-requirements.txt
@@ -32,7 +32,10 @@ ENV FLOOD_FACTOR ${flood_factor:-0}
 EXPOSE 9080
 WORKDIR /opt/microservices
 RUN python -m unittest discover
+RUN chmod 775 /opt/microservices && \
+    touch /opt/microservices/microservice.log && \
+    chmod 664 /opt/microservices/microservice.log
 
-USER 1
-
-CMD ["python", "productpage.py", "9080"]
+# hadolint ignore=DL3025
+CMD tail -f /opt/microservices/microservice.log & \
+    python productpage.py 9080

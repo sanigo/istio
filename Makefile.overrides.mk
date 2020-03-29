@@ -19,6 +19,10 @@
 # This repository has been enabled for BUILD_WITH_CONTAINER=1. Some
 # test cases fail within Docker, and Mac + Docker isn't quite perfect.
 # For more information see: https://github.com/istio/istio/pull/19322/
+export HUB ?= docker-istio.jointforce.com
+export TAG ?= 1.5.1
+VERSION ?= 1.5.1
+export BUILDINFO=$(shell echo `pwd`/build_info)
 
 BUILD_WITH_CONTAINER ?= 0
 
